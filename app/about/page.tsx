@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import { HeroSection } from "@/components/sections/HeroSection"
 import { LogoStrip } from "@/components/sections/LogoStrip"
 import { FeatureGrid } from "@/components/sections/FeatureGrid"
+import { TeamSection } from "@/components/sections/TeamSection"
 import { CTASection } from "@/components/sections/CTASection"
 
 export const metadata: Metadata = {
@@ -80,6 +81,8 @@ export default function AboutPage() {
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         features={features}
       />
+
+      <TeamSection />
 
       <CTASection
         title="Join our team"
