@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator"
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="flex flex-col items-center justify-center py-12 px-8 bg-gradient-to-br from-blue-50 to-indigo-100">
       <Container>
         <div className="flex flex-col items-center justify-center">
           <Card className="max-w-2xl">
@@ -36,6 +36,6 @@ export default function HomePage() {
           </Card>
         </div>
       </Container>
-    </main>
+    </div>
   )
 }
