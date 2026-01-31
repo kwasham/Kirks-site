@@ -1,24 +1,41 @@
+import { Container } from "@/components/site/Container"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+
 export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="max-w-2xl text-center space-y-6">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
-          Next.js migration in progress
-        </h1>
-        <p className="text-xl text-gray-700 leading-relaxed">
-          This site is being migrated from a static Webflow export to Next.js.
-          The legacy site can be found in the{' '}
-          <code className="bg-gray-200 px-2 py-1 rounded text-sm font-mono text-gray-800">
-            legacy/
-          </code>{' '}
-          folder.
-        </p>
-        <div className="mt-8 pt-6 border-t border-gray-300">
-          <p className="text-sm text-gray-600 italic">
-            ✨ Styled with Tailwind CSS
-          </p>
+      <Container>
+        <div className="flex flex-col items-center justify-center">
+          <Card className="max-w-2xl">
+            <CardHeader>
+              <CardTitle className="text-center">Next.js migration in progress</CardTitle>
+              <CardDescription className="text-center">
+                Building a modern web experience
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-center text-base text-muted-foreground">
+                This site is being migrated from a static Webflow export to Next.js.
+                The legacy site can be found in the{' '}
+                <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
+                  legacy/
+                </code>{' '}
+                folder.
+              </p>
+              <Separator />
+              <p className="text-center text-sm text-muted-foreground italic">
+                ✨ Styled with Tailwind CSS and shadcn/ui
+              </p>
+            </CardContent>
+            <CardFooter className="flex justify-center gap-4">
+              <Button variant="default">Get Started</Button>
+              <Button variant="outline">Learn More</Button>
+            </CardFooter>
+          </Card>
         </div>
-      </div>
+      </Container>
     </main>
   )
 }
