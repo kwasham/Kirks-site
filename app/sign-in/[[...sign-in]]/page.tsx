@@ -42,6 +42,7 @@ export default function SignInPage() {
 
     try {
       setIsGoogleLoading(true)
+      // Note: On success, user is redirected immediately, so loading state won't be reset
       await signIn.authenticateWithRedirect({
         strategy: 'oauth_google',
         redirectUrl: '/sso-callback',
