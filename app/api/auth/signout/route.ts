@@ -5,7 +5,7 @@ export async function POST() {
   const { userId, sessionId } = await auth()
 
   if (!userId || !sessionId) {
-    return NextResponse.redirect('/sign-in')
+    return NextResponse.redirect(new URL('/sign-in', process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'))
   }
 
   try {

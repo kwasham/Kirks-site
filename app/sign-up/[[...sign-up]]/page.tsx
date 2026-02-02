@@ -51,8 +51,6 @@ export default function SignUpPage() {
       if (completeSignUp.status === 'complete') {
         await setActive({ session: completeSignUp.createdSessionId })
         router.push('/dashboard')
-      } else {
-        console.log(completeSignUp)
       }
     } catch (err: unknown) {
       console.error('Error:', JSON.stringify(err, null, 2))

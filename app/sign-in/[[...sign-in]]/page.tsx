@@ -26,8 +26,6 @@ export default function SignInPage() {
       if (result.status === 'complete') {
         await setActive({ session: result.createdSessionId })
         router.push('/dashboard')
-      } else {
-        console.log(result)
       }
     } catch (err: unknown) {
       console.error('Error:', JSON.stringify(err, null, 2))
