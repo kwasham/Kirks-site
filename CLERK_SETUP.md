@@ -17,6 +17,7 @@ This implementation adds Clerk authentication to the Next.js application with:
 1. **`app/sign-in/[[...sign-in]]/page.tsx`**
    - Custom sign-in form built from scratch
    - Email and password inputs
+   - Google OAuth sign-in button
    - Error handling and display
    - Link to sign-up page
    - Redirects to `/dashboard` on successful authentication
@@ -37,6 +38,11 @@ This implementation adds Clerk authentication to the Next.js application with:
    - Quick action links to legacy pages
    - Sign-out functionality
    - Automatically redirects to `/sign-in` if not authenticated
+
+4. **`app/sso-callback/page.tsx`**
+   - OAuth callback handler for Google sign-in
+   - Uses Clerk's `AuthenticateWithRedirectCallback` component
+   - Handles redirect after successful OAuth authentication
 
 ### Configuration Files
 
@@ -77,7 +83,17 @@ This implementation adds Clerk authentication to the Next.js application with:
 3. Navigate to API Keys in the dashboard
 4. Copy your Publishable Key and Secret Key
 
-### 2. Configure Environment Variables
+### 2. Enable Google OAuth (Optional)
+
+To enable Google sign-in:
+
+1. In the Clerk Dashboard, navigate to "Social Connections" (or "SSO Connections")
+2. Find "Google" in the list of providers
+3. Click "Enable" or configure Google OAuth
+4. Follow Clerk's instructions to set up the Google OAuth app
+5. The Google sign-in button will automatically appear on the sign-in page
+
+### 3. Configure Environment Variables
 
 1. Copy the example environment file:
    ```bash
@@ -90,7 +106,7 @@ This implementation adds Clerk authentication to the Next.js application with:
    CLERK_SECRET_KEY=sk_test_xxxxx
    ```
 
-### 3. Run the Application
+### 4. Run the Application
 
 ```bash
 npm run dev
@@ -134,6 +150,7 @@ Public routes (no authentication required):
 ## Key Features
 
 ✅ **Custom UI**: No pre-built Clerk components - fully custom forms
+✅ **Google OAuth**: Sign in with Google (when enabled in Clerk Dashboard)
 ✅ **Email Verification**: Sign-up includes email verification step
 ✅ **Protected Routes**: Dashboard requires authentication
 ✅ **Automatic Redirects**: Users redirected to dashboard after auth
