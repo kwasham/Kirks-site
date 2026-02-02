@@ -5,6 +5,7 @@ import { useSignUp } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import Head from 'next/head'
 
 export default function SignUpPage() {
   const { isLoaded, signUp, setActive } = useSignUp()
@@ -30,11 +31,15 @@ export default function SignUpPage() {
     }
 
     try {
+      const nameParts = name.trim().split(' ')
+      const firstName = nameParts[0] || name
+      const lastName = nameParts.slice(1).join(' ').trim() || undefined
+
       await signUp.create({
         emailAddress: email,
         password,
-        firstName: name.split(' ')[0] || name,
-        lastName: name.split(' ').slice(1).join(' ') || undefined,
+        firstName,
+        lastName,
       })
 
       // Send email verification code
@@ -94,9 +99,11 @@ export default function SignUpPage() {
 
   return (
     <>
-      <link href="/css/normalize.css" rel="stylesheet" type="text/css" />
-      <link href="/css/webflow.css" rel="stylesheet" type="text/css" />
-      <link href="/css/kirks-amazing-site-b96f2d.webflow.css" rel="stylesheet" type="text/css" />
+      <Head>
+        <link href="/css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="/css/webflow.css" rel="stylesheet" type="text/css" />
+        <link href="/css/kirks-amazing-site-b96f2d.webflow.css" rel="stylesheet" type="text/css" />
+      </Head>
       
       <div className="page-wrapper page-wrapper-flex">
         <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" className="header-wrapper w-nav">

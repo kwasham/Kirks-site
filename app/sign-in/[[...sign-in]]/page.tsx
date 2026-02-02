@@ -5,12 +5,12 @@ import { useSignIn } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import Head from 'next/head'
 
 export default function SignInPage() {
   const { isLoaded, signIn, setActive } = useSignIn()
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [rememberMe, setRememberMe] = React.useState(false)
   const [error, setError] = React.useState('')
   const [isGoogleLoading, setIsGoogleLoading] = React.useState(false)
   const router = useRouter()
@@ -60,9 +60,11 @@ export default function SignInPage() {
 
   return (
     <>
-      <link href="/css/normalize.css" rel="stylesheet" type="text/css" />
-      <link href="/css/webflow.css" rel="stylesheet" type="text/css" />
-      <link href="/css/kirks-amazing-site-b96f2d.webflow.css" rel="stylesheet" type="text/css" />
+      <Head>
+        <link href="/css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="/css/webflow.css" rel="stylesheet" type="text/css" />
+        <link href="/css/kirks-amazing-site-b96f2d.webflow.css" rel="stylesheet" type="text/css" />
+      </Head>
       
       <div className="page-wrapper page-wrapper-flex">
         <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" className="header-wrapper w-nav">
@@ -129,14 +131,12 @@ export default function SignInPage() {
                         
                         <div className="flex-horizontal space-between gap-16px---flex-wrap">
                           <label className="w-checkbox checkbox-field-wrapper mg-bottom-0">
-                            <div className={`w-checkbox-input w-checkbox-input--inputType-custom checkbox ${rememberMe ? 'w--redirected-checked' : ''}`}></div>
+                            <div className="w-checkbox-input w-checkbox-input--inputType-custom checkbox"></div>
                             <input 
                               id="Remember-Me" 
                               type="checkbox" 
                               name="Remember-Me" 
                               style={{ opacity: 0, position: 'absolute', zIndex: -1 }}
-                              checked={rememberMe}
-                              onChange={(e) => setRememberMe(e.target.checked)}
                             />
                             <span className="w-form-label">Remember me</span>
                           </label>
