@@ -3,6 +3,9 @@
 import * as React from 'react'
 import { useSignIn } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import Image from 'next/image'
+import Head from 'next/head'
 
 export default function SignInPage() {
   const { isLoaded, signIn, setActive } = useSignIn()
@@ -42,7 +45,6 @@ export default function SignInPage() {
 
     try {
       setIsGoogleLoading(true)
-      // Note: On success, user is redirected immediately, so loading state won't be reset
       await signIn.authenticateWithRedirect({
         strategy: 'oauth_google',
         redirectUrl: '/sso-callback',
@@ -57,110 +59,168 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-8 shadow-md">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign in to your account
-          </h2>
+    <>
+      <Head>
+        <link href="/css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="/css/webflow.css" rel="stylesheet" type="text/css" />
+        <link href="/css/kirks-amazing-site-b96f2d.webflow.css" rel="stylesheet" type="text/css" />
+      </Head>
+      
+      <div className="page-wrapper page-wrapper-flex">
+        <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" className="header-wrapper w-nav">
+          <div className="container-default w-container">
+            <div className="header-content-wrapper center">
+              <div className="header-middle">
+                <Link href="/" className="header-logo-link center w-nav-brand">
+                  <Image src="/images/logo-gpt-webflow-ecommerce-template.png" alt="Logo" width={150} height={40} />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <p className="text-sm text-red-800">{error}</p>
-            </div>
-          )}
-          <div className="space-y-4 rounded-md shadow-sm">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Email address"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Password"
-              />
+        
+        <section className="section hero sign-in">
+          <div className="w-layout-blockcontainer container-default w-container">
+            <div className="inner-container _660px center">
+              <div className="position-relative">
+                <div className="card-content sign-in-card-content">
+                  <div className="gradient-border line-single-left"></div>
+                  <div>
+                    <div className="text-center mg-bottom-32px">
+                      <h1 className="heading-h2-size">Welcome back</h1>
+                      <p className="color-neutral-200 mg-bottom-0">Please fill your email and password to sign in.</p>
+                    </div>
+                    
+                    <div className="mg-bottom-24px w-form">
+                      <form id="wf-form-Sign-In-Form" name="wf-form-Sign-In-Form" onSubmit={handleSubmit}>
+                        {error && (
+                          <div className="error-message w-form-fail" style={{ display: 'block' }}>
+                            <div>{error}</div>
+                          </div>
+                        )}
+                        
+                        <div className="mg-bottom-32px">
+                          <label htmlFor="Email">Email</label>
+                          <input 
+                            className="input w-input" 
+                            maxLength={256} 
+                            name="Email" 
+                            placeholder="Email address" 
+                            type="email" 
+                            id="Email" 
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </div>
+                        
+                        <div className="mg-bottom-24px mg-bottom-24px---mbl">
+                          <label htmlFor="Password-2">Password</label>
+                          <input 
+                            className="input w-input" 
+                            maxLength={256} 
+                            name="Password" 
+                            placeholder="Enter your password" 
+                            type="password" 
+                            id="Password-2" 
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                        </div>
+                        
+                        <div className="flex-horizontal space-between gap-16px---flex-wrap">
+                          <label className="w-checkbox checkbox-field-wrapper mg-bottom-0">
+                            <div className="w-checkbox-input w-checkbox-input--inputType-custom checkbox"></div>
+                            <input 
+                              id="Remember-Me" 
+                              type="checkbox" 
+                              name="Remember-Me" 
+                              style={{ opacity: 0, position: 'absolute', zIndex: -1 }}
+                            />
+                            <span className="w-form-label">Remember me</span>
+                          </label>
+                          <Link href="/forgot-password" className="link text-decoration">Forgot password?</Link>
+                        </div>
+                        
+                        <div style={{ marginTop: '32px' }}>
+                          <button 
+                            type="submit" 
+                            className="btn-primary w-button" 
+                            style={{ width: '100%' }}
+                            disabled={!isLoaded}
+                          >
+                            Sign in
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                    
+                    <div>
+                      <div className="mg-bottom-32px">
+                        <div className="flex-horizontal">
+                          <div className="divider _0px width-100"></div>
+                          <div className="badge-primary sign-in-or">or</div>
+                          <div className="divider _0px width-100"></div>
+                        </div>
+                      </div>
+                      
+                      <div className="mg-bottom-32px">
+                        <button 
+                          onClick={signInWithGoogle}
+                          disabled={!isLoaded || isGoogleLoading}
+                          className="btn-secondary sign-in-button w-inline-block"
+                          style={{ width: '100%', textAlign: 'center', cursor: 'pointer' }}
+                        >
+                          <Image src="/images/google-icon-gpt-x-webflow-template.svg" alt="Google Icon" width={20} height={20} />
+                          <div className="mg-top-4px">{isGoogleLoading ? 'Redirecting...' : 'Sign in with Google'}</div>
+                        </button>
+                      </div>
+                      
+                      <div className="flex-horizontal text-center">
+                        <p className="color-neutral-200 mg-bottom-0">
+                          Don&apos;t have an account? <Link href="/sign-up" className="link text-decoration">Sign up today</Link>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="gradient-border line-single-right"></div>
+                </div>
+                
+                <div className="floating-sphere sign-in-top-sphere">
+                  <Image 
+                    src="/images/shape-v11-gpt-x-webflow-template.png" 
+                    alt="" 
+                    width={460} 
+                    height={460}
+                  />
+                </div>
+                <div className="floating-sphere sign-in-sphere-bottom">
+                  <Image 
+                    src="/images/shape-v6-gpt-x-webflow-template.png" 
+                    alt="" 
+                    width={410} 
+                    height={410}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={!isLoaded}
-              className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
-            >
-              Sign in
-            </button>
-          </div>
-
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-gray-500">Or continue with</span>
+        </section>
+        
+        <div>
+          <div className="w-layout-blockcontainer container-default w-container">
+            <div className="footer-bottom-flex">
+              <Link href="/" className="footer-logo-wrapper mg-bottom-0 w-inline-block">
+                <Image src="/images/logo-gpt-webflow-ecommerce-template.png" alt="Logo" width={150} height={40} />
+              </Link>
+              <p className="color-neutral-200 mg-bottom-0">
+                Copyright © Kirk&apos;s Site
+              </p>
             </div>
           </div>
-
-          <div>
-            <button
-              type="button"
-              onClick={signInWithGoogle}
-              disabled={!isLoaded || isGoogleLoading}
-              className="group relative flex w-full justify-center items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
-            >
-              <svg className="h-5 w-5" viewBox="0 0 24 24">
-                <path
-                  fill="#4285F4"
-                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                />
-                <path
-                  fill="#34A853"
-                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                />
-                <path
-                  fill="#FBBC05"
-                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                />
-                <path
-                  fill="#EA4335"
-                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                />
-              </svg>
-              {isGoogleLoading ? 'Redirecting...' : 'Sign in with Google'}
-            </button>
-          </div>
-
-          <div className="text-center text-sm">
-            <span className="text-gray-600">Don't have an account? </span>
-            <a href="/sign-up" className="font-medium text-indigo-600 hover:text-indigo-500">
-              Sign up
-            </a>
-          </div>
-        </form>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
