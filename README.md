@@ -31,6 +31,16 @@ yarn install
 pnpm install
 ```
 
+3. Set up Clerk Authentication:
+   - Create a free account at [Clerk](https://clerk.com)
+   - Create a new application in the Clerk Dashboard
+   - Copy `.env.example` to `.env.local`
+   - Add your Clerk API keys to `.env.local`:
+     ```bash
+     cp .env.example .env.local
+     ```
+   - Update `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` with your keys from the Clerk Dashboard
+
 ### Development
 
 Run the development server:
@@ -105,6 +115,25 @@ The original Webflow export is preserved in the `legacy/` directory. To view the
 - **Language**: TypeScript
 - **Runtime**: Node.js 20+
 - **Package Manager**: npm
+- **Authentication**: Clerk
+- **Styling**: Tailwind CSS v4
+
+## Authentication
+
+The application uses [Clerk](https://clerk.com) for authentication with custom sign-in and sign-up pages. After authentication, users are redirected to a dashboard overview page.
+
+### Authentication Routes
+
+- `/sign-in` - Custom sign-in page
+- `/sign-up` - Custom sign-up page (includes email verification)
+- `/dashboard` - Protected dashboard page (requires authentication)
+
+### Setting up Authentication
+
+1. Create a Clerk account at [clerk.com](https://clerk.com)
+2. Create a new application in your Clerk dashboard
+3. Copy your API keys to `.env.local` (see Installation step 3)
+4. The authentication is ready to use!
 
 ## Learn More
 
